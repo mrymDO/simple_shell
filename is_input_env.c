@@ -1,5 +1,13 @@
 #include "simple_shell.h"
 
+/**
+ * is_input_env - check if the input equal env command.
+ * @args: user's input.
+ * @env: command entred.
+ *
+ * Return: 1 on success. 0 otherwise.
+ */
+
 int is_input_env(char **args, char **env)
 {
 	int i = 0, len = 0;

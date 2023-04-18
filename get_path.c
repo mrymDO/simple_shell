@@ -1,4 +1,10 @@
 #include "simple_shell.h"
+/**
+ * get_path - get the full path for the command entred.
+ * @cmd: the command entred.
+ *
+ * Return: the full path. NULL otherwise.
+ */
 
 char *get_path(char *cmd)
 {
@@ -12,7 +18,6 @@ char *get_path(char *cmd)
 	free(pat1);
 
 	i = 0;
-
 	while (dirs[i])
 	{
 		path = malloc(sizeof(char) * (_strlen(dirs[i]) + _strlen(cmd) + 2));
