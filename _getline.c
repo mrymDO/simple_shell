@@ -5,7 +5,7 @@
  * @n: the size of the buffer pointed to by *lineptr
  * ]stream: pointer to filee stream from which to read the input line
  * Return: number of char read including '\n' excluding '\0'
- * if error occurs or EOF, return -1
+ * if error occurs or EOF, else return -1
  */
 
 #define SIZE 256
