@@ -18,7 +18,7 @@ int is_input_env(char **args, char **env)
 		i++;
 	}
 	i = 0;
-	if (strcmp(args[0], "env") == 0 && len == 1)
+	if (_strcmp(args[0], "env") == 0 && len == 1)
 	{
 		while (env[i])
 		{
