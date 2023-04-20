@@ -18,10 +18,8 @@ char *get_path(char *cmd)
 	free(pat1);
 
 	i = 0;
-<<<<<<< HEAD
-=======
 
->>>>>>> bc16b26... add implemented functions
+
 	while (dirs[i])
 	{
 		path = malloc(sizeof(char) * (_strlen(dirs[i]) + _strlen(cmd) + 2));

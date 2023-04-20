@@ -13,13 +13,12 @@ int is_input_exit(char **args)
 
 	while (args[i++])
 		len++;
-<<<<<<< HEAD
+
 
 	if (strcmp(args[0], "exit") == 0 && len == 1)
-=======
 	
 	if (_strcmp(args[0], "exit") == 0 && len == 1)
->>>>>>> bc16b26... add implemented functions
+
 		return (1);
 	return (0);
 }
