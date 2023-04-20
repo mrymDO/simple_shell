@@ -1,5 +1,14 @@
 #include "simple_shell.h"
 
+/**
+ * main - the main function.
+ * @argc: number of arguments.
+ * @argv: array of strings.
+ * @env: environment variables.
+ *
+ * Return: 0 always success.
+ */
+
 int main(int argc, char **argv, char **env)
 {
 	char **args;
@@ -9,20 +18,20 @@ int main(int argc, char **argv, char **env)
 
 	(void)argc;
 
-	while(1)
+	while (1)
 	{
 		buf = NULL;
-		
+
 		_putchar('$');
 		buf = read_line();
 		buf_copy = _strdup(buf);
 		len_args = get_num_tokens(buf);
- 
+
 		args = malloc(sizeof(char *) * (len_args + 1));
 
 		args = fill_arr_by_tokens(buf_copy, args);
 
-		if(execute_cmd(args, argv, env))
+		if (execute_cmd(args, argv, env))
 			continue;
 
 		free_arr_of_strs(args);
