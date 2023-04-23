@@ -28,14 +28,19 @@ int main(int argc, char **argv, char **env)
 		len_args = get_num_tokens(buf);
 
 		args = malloc(sizeof(char *) * (len_args + 1));
-
+		if (args == NULL)
+		{
+			perror("malloc fails ");
+			return (-1);
+		}
 		args = fill_arr_by_tokens(buf_copy, args);
-
+		if (check_for_comts(args))
+			args = check_for_comts(args);
 		if (execute_cmd(args, argv, env))
 			continue;
-
 		free_arr_of_strs(args);
 		free(buf_copy);
+		free(buf);
 	}
 	return (0);
 }

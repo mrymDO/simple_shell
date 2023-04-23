@@ -21,11 +21,16 @@ char *get_path(char *cmd)
 	while (dirs[i])
 	{
 		path = malloc(sizeof(char) * (_strlen(dirs[i]) + _strlen(cmd) + 2));
+		if (path == NULL)
+			return (NULL);
 		_strcat(path, dirs[i]);
 		_strcat(path, "/");
 		_strcat(path, cmd);
 		if (stat(path, &st) == 0)
+		{
+			free_arr_of_strs(dirs);
 			return (path);
+		}
 		i++;
 	}
 	return (NULL);

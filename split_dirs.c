@@ -21,12 +21,15 @@ char **split_dirs(char *env_dirs)
 	}
 
 	arr_dirs = malloc(sizeof(char *) * (num_dirs + 1));
-
+	if (arr_dirs == NULL)
+		return (NULL);
 	piece = strtok(env_dirs, ":");
 	i = 0;
 	while (piece != NULL)
 	{
 		arr_dirs[i] = malloc(sizeof(char) * (_strlen(piece) + 1));
+		if (arr_dirs[i] == NULL)
+			return (NULL);
 		_strcpy(arr_dirs[i], piece);
 		piece = strtok(NULL, ":");
 		i++;
