@@ -1,7 +1,7 @@
 #include "simple_shell.h"
 
 /**
- * read_line - read user's input.
+ * read_line - read user's input
  *
  * Return: the buffer entered by user.
  */
