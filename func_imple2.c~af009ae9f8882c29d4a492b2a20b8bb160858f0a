@@ -66,7 +66,6 @@ int _strncmp(const char *s1, const char *s2, size_t n)
 void *_realloc(void *ptr, unsigned int size)
 {
 	void *p;
-	unsigned int i;
 
 	if (ptr != NULL && size == 0)
 	{

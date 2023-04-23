@@ -18,6 +18,8 @@ char *get_path(char *cmd)
 	free(pat1);
 
 	i = 0;
+
+
 	while (dirs[i])
 	{
 		path = malloc(sizeof(char) * (_strlen(dirs[i]) + _strlen(cmd) + 2));
