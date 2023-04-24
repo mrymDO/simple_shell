@@ -24,6 +24,8 @@ int main(int argc, char **argv, char **env)
 
 		_putchar('$');
 		buf = read_line();
+		if (*buf == '\n')
+			continue;
 		buf_copy = _strdup(buf);
 		len_args = get_num_tokens(buf);
 
