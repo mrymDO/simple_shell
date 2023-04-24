@@ -20,8 +20,6 @@ int main(int argc, char **argv, char **env)
 
 	while (1)
 	{
-		buf = NULL;
-
 		_putchar('$');
 		buf = read_line();
 		if (*buf == '\n')
@@ -32,12 +30,17 @@ int main(int argc, char **argv, char **env)
 		args = malloc(sizeof(char *) * (len_args + 1));
 		if (args == NULL)
 		{
+			free(buf_copy);
+                	free(buf);
 			perror("malloc fails ");
 			return (-1);
 		}
 		args = fill_arr_by_tokens(buf_copy, args);
-		if (check_for_comts(args))
+		/*if (check_for_comts(args))
+		{
+			free_arr_of_strs(args);
 			args = check_for_comts(args);
+		}*/
 		if (execute_cmd(args, argv, env))
 			continue;
 		free_arr_of_strs(args);

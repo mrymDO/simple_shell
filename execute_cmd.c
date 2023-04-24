@@ -10,7 +10,7 @@
 
 int execute_cmd(char **args, char **argv, char **env)
 {
-	char *path;
+	char *path, *tmp = args[0];
 
 	if (_strcmp(args[0], "setenv") == 0)
         {
@@ -47,7 +47,10 @@ int execute_cmd(char **args, char **argv, char **env)
 			}
 		}
 		else
+		{
+			args[0] = tmp;
 			perror(argv[0]);
+		}
 		free(path);
 	}
 	return (0);

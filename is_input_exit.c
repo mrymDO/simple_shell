@@ -7,7 +7,7 @@ void is_input_exit(char **args)
 	while(args[i++])
 		len++;
 
-	if (strcmp(args[0], "exit") == 0)
+	if (args[0] && strcmp(args[0], "exit") == 0)
 	{
 		if (len == 1)
 			exit(status);
