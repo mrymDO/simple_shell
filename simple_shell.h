@@ -10,7 +10,6 @@
 #include <string.h>
 #include <errno.h>  
 #include <stddef.h> 
-#include <fcntl.h>
 
 
 extern char **environ;
@@ -37,11 +36,13 @@ void free_arr_of_strs(char **arr);
 unsigned int get_num_tokens(char *buf);
 char *get_path(char *cmd);
 int is_input_env(char **args, char **env);
-int is_input_exit(char **args);
+void is_input_exit(char **args);
 int is_path(char *cmd);
 char *read_line();
 char **split_dirs(char *env_dirs);
-
-
+void set_env(char **args, char **env);
+int change_dir(char **args);
+void unset_env(char **args, char **env);
+char **check_for_comts(char **args);
 
 #endif

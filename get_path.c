@@ -1,4 +1,5 @@
 #include "simple_shell.h"
+
 /**
  * get_path - get the full path for the command entred.
  * @cmd: the command entred.
@@ -8,27 +9,35 @@
 
 char *get_path(char *cmd)
 {
-	char *pat = getenv("PATH");
-	char *pat1 = _strdup(pat);
-	char **dirs = split_dirs(pat1);
-	char *path;
+	char *path = getenv("PATH");
+	char *path1 = strdup(path);
+	char **dirs = split_dirs(path1);
+	char *path2;
 	struct stat st;
 	int i = 0;
 
-	free(pat1);
-
-	i = 0;
-
+	free(path1);
 
 	while (dirs[i])
 	{
-		path = malloc(sizeof(char) * (_strlen(dirs[i]) + _strlen(cmd) + 2));
-		_strcat(path, dirs[i]);
-		_strcat(path, "/");
-		_strcat(path, cmd);
-		if (stat(path, &st) == 0)
-			return (path);
+		path2 = malloc(sizeof(char) * (strlen(dirs[i]) + strlen(cmd) + 2));
+		if (path2 == NULL)
+		{
+			free_arr_of_strs(dirs);
+			return (NULL);
+		}
+		_strcat(path2, dirs[i]);
+		_strcat(path2, "/");
+		_strcat(path2, cmd);
+		if (stat(path2, &st) == 0)
+		{
+			free_arr_of_strs(dirs);
+			return (path2);
+		}
+		free(path2);
+
 		i++;
 	}
+	free_arr_of_strs(dirs);
 	return (NULL);
 }

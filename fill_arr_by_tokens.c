@@ -10,14 +10,21 @@
 char **fill_arr_by_tokens(char *buf_copy, char **args)
 {
 	char *piece = NULL;
-	int i = 0;
+	int i = 0, j;
 
-	piece = strtok(buf_copy, " \"\n");
+	piece = strtok(buf_copy, " \t\n");
 	while (piece != NULL)
 	{
 		args[i] = malloc(sizeof(char) * (_strlen(piece) + 1));
+		if (args[i] == NULL)
+		{
+			for (j = 0; j < i; j++)
+                		free(args[j]);
+			free(args[i]);
+			return (NULL);
+		}
 		_strcpy(args[i], piece);
-		piece = strtok(NULL, " \"\n");
+		piece = strtok(NULL, " \t\n");
 		i++;
 	}
 	args[i] = NULL;

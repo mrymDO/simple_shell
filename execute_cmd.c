@@ -10,10 +10,26 @@
 
 int execute_cmd(char **args, char **argv, char **env)
 {
-	char *path;
+	char *path, *tmp = args[0];
 
-	if (is_input_exit(args))
-		exit(0);
+	if (_strcmp(args[0], "setenv") == 0)
+        {
+                set_env(args, env);
+                return(1);
+        }
+	if (_strcmp(args[0], "unsetenv") == 0)
+        {
+                unset_env(args, env);
+                return(1);
+        }	
+	if (_strcmp(args[0], "cd") == 0)
+	{
+		change_dir(args);
+		return(1);
+	}
+
+	is_input_exit(args);
+	
 	if (is_input_env(args, env))
 		return (1);
 	if (is_path(args[0]))
@@ -24,11 +40,18 @@ int execute_cmd(char **args, char **argv, char **env)
 		if (path != NULL)
 		{
 			args[0] = realloc(args[0], _strlen(path) + 1);
-			_strcpy(args[0], path);
-			forking(args);
+			if (args[0])
+			{
+				_strcpy(args[0], path);
+				forking(args);
+			}
 		}
 		else
+		{
+			args[0] = tmp;
 			perror(argv[0]);
+		}
+		free(path);
 	}
 	return (0);
 }

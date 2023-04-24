@@ -107,7 +107,14 @@ char *_strchr(const char *s, char c)
 		return ((char *)s);
 		s++;
 	}
+<<<<<<< HEAD
 	return (NULL);
+=======
+	if (*s != c)
+		return ("\0");
+
+	return (s);
+>>>>>>> 3bad1d4b66b01742affd5f9d0c105f772601051f
 }
 
 
