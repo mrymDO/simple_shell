@@ -1,14 +1,14 @@
 #include "simple_shell.h"
 
+#define SIZE 256
 /**
  * _getline - reads an entire line from stream
+ * @lineptr: ptr to ptr to
  * @n: the size of the buffer pointed to by *lineptr
- * ]stream: pointer to filee stream from which to read the input line
+ * @stream: pointer to filee stream from which to read the input line
  * Return: number of char read including '\n' excluding '\0'
  * if error occurs or EOF, else return -1
  */
-
-#define SIZE 256
 
 ssize_t _getline(char **lineptr, size_t *n, char *stream)
 {
