@@ -10,7 +10,7 @@
 char *get_path(char *cmd)
 {
 	char *path = _getenv("PATH");
-	char *path1 = strdup(path);
+	char *path1 = _strdup(path);
 	char **dirs = split_dirs(path1);
 	char *path2;
 	int i = 0;
@@ -18,7 +18,7 @@ char *get_path(char *cmd)
 	free(path1);
 	while (dirs[i])
 	{
-		path2 = malloc(sizeof(char) * (strlen(dirs[i]) + strlen(cmd) + 2));
+		path2 = malloc(sizeof(char) * (_strlen(dirs[i]) + _strlen(cmd) + 2));
 		if (path2 == NULL)
 		{
 			free_arr_of_strs(dirs);

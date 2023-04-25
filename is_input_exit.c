@@ -20,7 +20,7 @@ void is_input_exit(char **args)
 			exit(status);
 		if (args[1] != NULL && len == 2)
 		{
-			status = atoi(args[1]);
+			status = _atoi(args[1]);
 			exit(status);
 		}
 	}

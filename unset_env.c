@@ -29,7 +29,8 @@ void unset_env(char **args, char **env)
 		i = 0;
 		while (env[i])
 		{
-			printf("%s\n", env[i]);
+			write(1, env[i], _strlen(env[i]);
+			_putchar('\n');
 			i++;
 		}
 	}

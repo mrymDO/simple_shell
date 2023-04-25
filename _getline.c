@@ -12,12 +12,10 @@
 
 ssize_t _getline(char **lineptr, size_t *n, char *stream)
 {
-	static char buffer[SIZE];
-	size_t size = *n;
+	static char buffer[SIZE], *p;
+	size_t size = *n, total_read = 0;
 	int fd;
 	ssize_t n_read = 0;
-	size_t total_read = 0;
-	char *p;
 
 	if (*lineptr == NULL)
 	{
@@ -25,11 +23,9 @@ ssize_t _getline(char **lineptr, size_t *n, char *stream)
 		if (*lineptr == NULL)
 			return (-1);
 	}
-
 	fd = open(stream, O_RDONLY);
 	if (fd == -1)
 		return (-1);
-
 	while ((n_read = read(fd, buffer, SIZE)) > 0)
 	{
 		total_read += n_read;
@@ -45,22 +41,15 @@ ssize_t _getline(char **lineptr, size_t *n, char *stream)
 					close(fd);
 					free(*lineptr);
 					return (-1);
-				}
-				*n = size;
-			}
-			(*lineptr)[total_read++] = *p++;
+				} *n = size;
+			} (*lineptr)[total_read++] = *p++;
 			n_read--;
 		}
 		if (*(p - 1) == '\n')
 			break;
-	}
-	close(fd);
-
+	} close(fd);
 	if (total_read == 0 && n_read <= 0)
 		return (-1);
-
 	(*lineptr)[total_read] = '\0';
 	return (total_read);
 }
-
-
