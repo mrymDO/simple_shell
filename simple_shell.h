@@ -10,7 +10,7 @@
 #include <string.h>
 #include <errno.h>  
 #include <stddef.h> 
-
+#include <fcntl.h>
 
 extern char **environ;
 
@@ -25,7 +25,7 @@ char *_strdup(const char *s);
 int _strncmp(const char *s1, const char *s2, size_t n);
 void *_realloc(void *ptr, unsigned int size);
 char *_memcpy(char *dest, char *src, unsigned int n);
-
+int _atoi(char *s);
 
 
 

@@ -19,6 +19,13 @@ char **fill_arr_by_tokens(char *buf_copy, char **args)
 			break;
 		args[i] = malloc(sizeof(char) * (_strlen(piece) + 1));
 		if (args[i] == NULL)
+<<<<<<< HEAD
+=======
+		{
+			for (j = 0; j < i; j++)
+                		free(args[j]);
+			free(args);
+>>>>>>> a4e13f7ba565407c56907b28971766d4fafbce66
 			return (NULL);
 		_strcpy(args[i], piece);
 		piece = strtok(NULL, " \t\n");

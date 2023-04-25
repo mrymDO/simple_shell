@@ -24,6 +24,7 @@ char *get_path(char *cmd)
 			free_arr_of_strs(dirs);
 			return (NULL);
 		}
+		memset(path2, 0, sizeof(char) * (strlen(dirs[i]) + strlen(cmd) + 2));
 		_strcat(path2, dirs[i]);
 		_strcat(path2, "/");
 		_strcat(path2, cmd);
