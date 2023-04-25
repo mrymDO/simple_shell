@@ -44,5 +44,6 @@ void set_env(char **args, char **env);
 int change_dir(char **args);
 int change(char *path);
 void unset_env(char **args, char **env);
+ssize_t _getline(char **lineptr, size_t *n, char *stream);
 
 #endif
