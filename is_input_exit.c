@@ -14,14 +14,15 @@ void is_input_exit(char **args)
 	while (args[i++])
 		len++;
 
-	if (args[0] && strcmp(args[0], "exit") == 0)
+	if (len == 1)
 	{
-		if (len == 1)
-			exit(status);
-		if (args[1] != NULL && len == 2)
-		{
-			status = atoi(args[1]);
-			exit(status);
-		}
+		free_arr_of_strs(args);
+		exit(status);
+	}
+	if (args[1] != NULL && len == 2)
+	{
+		free_arr_of_strs(args);
+		status = atoi(args[1]);
+		exit(status);
 	}
 }

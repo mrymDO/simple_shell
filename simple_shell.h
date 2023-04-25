@@ -10,7 +10,7 @@
 #include <string.h>
 #include <errno.h>  
 #include <stddef.h> 
-
+#include <fcntl.h>
 
 extern char **environ;
 
@@ -45,5 +45,6 @@ int change_dir(char **args);
 int change(char *path);
 void unset_env(char **args, char **env);
 ssize_t _getline(char **lineptr, size_t *n, char *stream);
+int check_built_n(char **args, char **env);
 
 #endif

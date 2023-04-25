@@ -9,16 +9,25 @@
 
 char *get_path(char *cmd)
 {
-	char *path = _getenv("PATH");
-	char *path1 = strdup(path);
-	char **dirs = split_dirs(path1);
-	char *path2;
+	char *path, *path1, *path2, **dirs;
 	int i = 0;
 
+	path = _getenv("PATH");
+	if (path == NULL)
+		return (NULL);
+
+	path1 = _strdup(path);
+	if (path1 == NULL)
+		return (NULL);
+
+	dirs = split_dirs(path1);
+	if (dirs == NULL)
+		return (NULL);
 	free(path1);
-	while (dirs[i])
+
+	while (dirs[i++])
 	{
-		path2 = malloc(sizeof(char) * (strlen(dirs[i]) + strlen(cmd) + 2));
+		path2 = malloc(sizeof(char) * (_strlen(dirs[i]) + _strlen(cmd) + 2));
 		if (path2 == NULL)
 		{
 			free_arr_of_strs(dirs);
@@ -33,7 +42,6 @@ char *get_path(char *cmd)
 			return (path2);
 		}
 		free(path2);
-		i++;
 	}
 	free_arr_of_strs(dirs);
 	return (NULL);
