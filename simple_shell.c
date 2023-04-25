@@ -17,9 +17,14 @@ int main(int argc, char **argv, char **env)
 	unsigned int len_args;
 	(void)argc;
 
+	if (!isatty(STDIN_FILENO)) {
+		perror("Error ");
+		return (-1);
+	}
 	while (1)
 	{
 		_putchar('$');
+		fflush(stdout);
 		buf = read_line();
 		if (*buf == '\n')
 			continue;
