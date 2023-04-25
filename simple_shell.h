@@ -42,7 +42,7 @@ char *read_line();
 char **split_dirs(char *env_dirs);
 void set_env(char **args, char **env);
 int change_dir(char **args);
+int change(char *path);
 void unset_env(char **args, char **env);
-char **check_for_comts(char **args);
 
 #endif

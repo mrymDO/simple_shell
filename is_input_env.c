@@ -22,10 +22,11 @@ int is_input_env(char **args, char **env)
 	{
 		while (env[i])
 		{
-			printf("%s\n", env[i]);
+			write(1, env[i], _strlen(env[i]));
+			_putchar('\n');
 			i++;
 		}
-	return (1);
+		return (1);
 	}
 	return (0);
 }

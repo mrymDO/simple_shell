@@ -1,51 +1,63 @@
 #include "simple_shell.h"
 
-int change_dir(char **args)
+#define SIZE 1024
+/**
+ * change - execute chdir function.
+ * @path: path to be executed.
+ *
+ * Return: 1 on success. -1 on failure.
+ */
+
+int change(char *path)
 {
-	struct stat st;
-	int i = 0, len = 0;
-	char *buf = NULL;
-	size_t size = 0;
+	char buf[SIZE];
 
-	while(args[i])
+	if (path != NULL)
 	{
-		len++;
-		i++;
-	}
-
-	if (len == 1 )
-	{
-		if (chdir(_getenv("HOME")) == -1)
+		if (chdir(path) == -1)
 		{
 			perror("chdir error");
 			exit(1);
 		}
 		setenv("OLDPWD", _getenv("PWD"), 1);
-		setenv("PWD", _getenv("HOME"), 1);
+		setenv("PWD", getcwd(buf, SIZE), 1);
 		return (1);
 	}
-	if (args[1] && stat(args[1], &st) == 0 && len == 2)
+	return (-1);
+}
+
+/**
+ * change_dir - change current working directory.
+ * @args: array of string entered.
+ *
+ * Return: 1 on success. 0 otherwise.
+ */
+
+int change_dir(char **args)
+{
+	int i = 0, len = 0;
+
+	while (args[i])
 	{
-			if (chdir(args[1]) == -1)
-			{
-				perror("chdir error");
-				exit(1);
-			}
-			setenv("OLDPWD", _getenv("PWD"), 1);
-			setenv("PWD", getcwd(buf, size), 1);
+		len++;
+		i++;
+	}
+
+	if (len == 1)
+	{
+		if (change(_getenv("HOME")))
+			return (1);
+	}
+	if (args[1] && is_path(args[1]) && len == 2)
+	{
+		if (change(args[1]))
 			return (1);
 	}
 	if (args[1][0] == '-')
-                {
-                        if (chdir(_getenv("OLDPWD")) == -1)
-                        {
-                                perror("chdir error");
-                                exit(1);
-                        }
-                        setenv("OLDPWD", _getenv("PWD"), 1);
-                        setenv("PWD", getcwd(buf, size), 1);
-                        return (1);
-                }
+	{
+		if (change(_getenv("OLDPWD")))
+			return (1);
+	}
 	perror("cd ");
 	return (0);
 }

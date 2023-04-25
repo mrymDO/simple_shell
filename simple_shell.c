@@ -6,7 +6,7 @@
  * @argv: array of strings.
  * @env: environment variables.
  *
- * Return: 0 always success.
+ * Return: 0 on success.-1 otherwise.
  */
 
 int main(int argc, char **argv, char **env)
@@ -26,26 +26,18 @@ int main(int argc, char **argv, char **env)
 			continue;
 		buf_copy = _strdup(buf);
 		len_args = get_num_tokens(buf);
-
 		args = malloc(sizeof(char *) * (len_args + 1));
 		if (args == NULL)
 		{
-			free(buf_copy);
-                	free(buf);
 			perror("malloc fails ");
 			return (-1);
 		}
 		args = fill_arr_by_tokens(buf_copy, args);
-		/*if (check_for_comts(args))
-		{
-			free_arr_of_strs(args);
-			args = check_for_comts(args);
-		}*/
 		if (execute_cmd(args, argv, env))
 			continue;
 		free_arr_of_strs(args);
-		free(buf_copy);
 		free(buf);
+		free(buf_copy);
 	}
 	return (0);
 }

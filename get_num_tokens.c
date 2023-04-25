@@ -10,11 +10,13 @@ unsigned int get_num_tokens(char *buf)
 	unsigned int num_tokens = 0;
 	char *piece = NULL;
 
-	piece = strtok(buf, " \n");
+	piece = strtok(buf, " \t\n");
 	while (piece != NULL)
 	{
+		if (piece[0] == '#')
+			break;
 		num_tokens++;
-		piece = strtok(NULL, " \n");
+		piece = strtok(NULL, " \t\n");
 	}
 	return (num_tokens);
 }

@@ -9,15 +9,13 @@
 
 char *get_path(char *cmd)
 {
-	char *path = getenv("PATH");
+	char *path = _getenv("PATH");
 	char *path1 = strdup(path);
 	char **dirs = split_dirs(path1);
 	char *path2;
-	struct stat st;
 	int i = 0;
 
 	free(path1);
-
 	while (dirs[i])
 	{
 		path2 = malloc(sizeof(char) * (strlen(dirs[i]) + strlen(cmd) + 2));
@@ -29,13 +27,12 @@ char *get_path(char *cmd)
 		_strcat(path2, dirs[i]);
 		_strcat(path2, "/");
 		_strcat(path2, cmd);
-		if (stat(path2, &st) == 0)
+		if (is_path(path2))
 		{
 			free_arr_of_strs(dirs);
 			return (path2);
 		}
 		free(path2);
-
 		i++;
 	}
 	free_arr_of_strs(dirs);

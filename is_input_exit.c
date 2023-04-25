@@ -1,10 +1,17 @@
 #include "simple_shell.h"
 
+/**
+ * is_input_exit - check if user entered exit cmd.
+ * @args: array of strings.
+ *
+ * Return: void.
+ */
+
 void is_input_exit(char **args)
 {
 	int i = 0, len = 0, status = 0;
 
-	while(args[i++])
+	while (args[i++])
 		len++;
 
 	if (args[0] && strcmp(args[0], "exit") == 0)
@@ -17,5 +24,4 @@ void is_input_exit(char **args)
 			exit(status);
 		}
 	}
-	return;
 }
