@@ -20,7 +20,7 @@ char **fill_arr_by_tokens(char *buf_copy, char **args)
 		{
 			for (j = 0; j < i; j++)
                 		free(args[j]);
-			free(args[i]);
+			free(args);
 			return (NULL);
 		}
 		_strcpy(args[i], piece);

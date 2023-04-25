@@ -9,12 +9,10 @@
 
 char **split_dirs(char *env_dirs)
 {
-
-
         char **arr_dirs = NULL;
         int i = 0, num_dirs = 0, j;
         char *piece;
-        char *env_dirs_copy;
+        char *env_dirs_copy = NULL;
 
 	if (env_dirs)
 		env_dirs_copy = _strdup(env_dirs);
@@ -43,7 +41,7 @@ char **split_dirs(char *env_dirs)
 		{
 			for (j = 0; j < i; j++)
                 		free(arr_dirs[j]);
-			free(arr_dirs[i]);
+			free(arr_dirs);
 			free(env_dirs_copy);
 			return (NULL);
 		}

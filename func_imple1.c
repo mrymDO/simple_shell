@@ -81,7 +81,7 @@ int _strcmp(char *s1, char *s2)
 {
 	int i;
 
-	for (i = 0; s1[i] && s2[i]; i++)
+	for (i = 0; s1[i] || s2[i]; i++)
 	{
 		if (s1[i] != s2[i])
 		{
@@ -99,22 +99,19 @@ int _strcmp(char *s1, char *s2)
  * Return: the first occurence of chracter c or NULL if character not found
  */
 
-char *_strchr(const char *s, char c)
+char *_strchr(char *s, char c)
 {
 	while (*s != '\0')
 	{
 		if (*s == c)
-		return ((char *)s);
+		return (s);
 		s++;
 	}
-<<<<<<< HEAD
-	return (NULL);
-=======
 	if (*s != c)
-		return ("\0");
+		return ('\0');
 
 	return (s);
->>>>>>> 3bad1d4b66b01742affd5f9d0c105f772601051f
+
 }
 
 
