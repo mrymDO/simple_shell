@@ -17,7 +17,7 @@ int change(char *path)
 		if (chdir(path) == -1)
 		{
 			perror("chdir error");
-			exit(1);
+			exit(EXIT_FAILURE);
 		}
 		setenv("OLDPWD", _getenv("PWD"), 1);
 		setenv("PWD", getcwd(buf, SIZE), 1);

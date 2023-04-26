@@ -6,7 +6,7 @@
  * Return : void
  */
 
-void forking(char *args[])
+void forking(char *args[], char **env)
 {
 	pid_t pid;
 	int status;
@@ -15,18 +15,18 @@ void forking(char *args[])
 
 	if (pid == -1)
 	{
-		perror("fork error");
-		return;
+		perror("Fork error");
+		exit(EXIT_FAILURE);
 	}
 	if (pid == 0)
 	{
-		execve(args[0], args, NULL);
+		execve(args[0], args, env);
 	}
 	else
 	{
 		if (wait(&status) == -1)
 		{
-			perror("wait error");
+			perror("Wait error");
 		}
 	}
 }

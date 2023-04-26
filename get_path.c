@@ -8,7 +8,7 @@
 
 char *get_path(char *cmd)
 {
-	char *pat = getenv("PATH");
+	char *pat = _getenv("PATH");
 	char *pat1 = _strdup(pat);
 	char **dirs = split_dirs(pat1);
 	char *path;

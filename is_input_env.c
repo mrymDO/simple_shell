@@ -8,7 +8,7 @@
  * Return: 1 on success. 0 otherwise.
  */
 
-int is_input_env(char **args, char **env)
+void is_input_env(char **args, char **env)
 {
 	int i = 0, len = 0;
 
@@ -25,7 +25,5 @@ int is_input_env(char **args, char **env)
 			printf("%s\n", env[i]);
 			i++;
 		}
-	return (1);
 	}
-	return (0);
 }

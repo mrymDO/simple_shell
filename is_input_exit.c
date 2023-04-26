@@ -4,10 +4,10 @@ void is_input_exit(char **args)
 {
 	int i = 0, len = 0, status = 0;
 
-	while(args[i++])
+	while (args[i++])
 		len++;
 
-	if (strcmp(args[0], "exit") == 0)
+	if (_strcmp(args[0], "exit") == 0)
 	{
 		if (len == 1)
 			exit(status);
