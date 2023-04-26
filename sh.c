@@ -25,32 +25,31 @@ int main(void)
 			exit(EXIT_FAILURE);
 		}
 		if (c_reads > 0 && buffer[c_reads - 1] == '\n')
-		{
 			buffer[c_reads - 1] = '\0';
-			args = malloc(sizeof(char *) * 2);
-			args[0] = buffer;
+
+		args = malloc(sizeof(char *) * 2);
+		args[0] = buffer;
 		args[1] = NULL;
+	
 		pid = fork();
 		if (pid < 0)
 		{
 			perror("Error fork");
+			exit(EXIT_FAILURE);
 		}
-		else if (pid == 0)
-		{
+		if (pid == 0)
 			if (execve(args[0], args, NULL) == -1)
 			{
 				perror("Error execve");
+				exit(EXIT_FAILURE);
 			}
-		}
-		else
+	
+		if (waitpid(pid, &status, 0) == -1)
 		{
-			if (wait(&status) == -1)
-			{
-				perror("Error wait");
-			}
+			perror("Error wait");
+			exit(EXIT_FAILURE);
 		}
                 free(args);
-		}
 	}
 	free(buffer);
 	return (0);
