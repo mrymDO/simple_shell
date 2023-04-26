@@ -10,7 +10,7 @@
 #include <string.h>
 #include <errno.h>  
 #include <stddef.h> 
-#include <fcntl.h>
+
 
 extern char **environ;
 
@@ -25,7 +25,6 @@ char *_strdup(const char *s);
 int _strncmp(const char *s1, const char *s2, size_t n);
 void *_realloc(void *ptr, unsigned int size);
 char *_memcpy(char *dest, char *src, unsigned int n);
-int _atoi(char *s);
 
 
 
@@ -41,11 +40,5 @@ void is_input_exit(char **args);
 int is_path(char *cmd);
 char *read_line();
 char **split_dirs(char *env_dirs);
-void set_env(char **args, char **env);
-int change_dir(char **args);
-int change(char *path);
-void unset_env(char **args, char **env);
-ssize_t _getline(char **lineptr, size_t *n, char *stream);
-int check_built_n(char **args, char **env);
 
 #endif

@@ -1,7 +1,7 @@
 #include "simple_shell.h"
 
 /**
- * forking - create and execute command in child process
+ * forking - create and execute command in child process.
  * @args: the command and its arguments to be executed int the chils process
  * Return : void
  */
@@ -20,7 +20,7 @@ void forking(char *args[])
 	}
 	if (pid == 0)
 	{
-		if (execve(args[0], args, environ) == -1)
+		if (execve(args[0], args, NULL) == -1)
 		{
 			perror("execve error");
 			return;

@@ -4,22 +4,20 @@
  * execute_cmd - execute a command with its arguments
  * @args: represents the command and its arguments
  * @argv: represents the arguments passed to the main function
- * @env: represents the environment variable of current process
- * Return: 1 on success. 0 otherwise.
+ * @env: represents the environ,ent variable of current process
+ * Return: 0 if command is executed and 1 if there is an error
  */
 
 int execute_cmd(char **args, char **argv, char **env)
 {
 	char *path;
 
-
+	is_input_exit(args);
+	
 	if (is_input_env(args, env))
 		return (1);
 	if (is_path(args[0]))
-	{
 		forking(args);
-		return (1);
-	}
 	else
 	{
 		path = get_path(args[0]);
@@ -32,9 +30,9 @@ int execute_cmd(char **args, char **argv, char **env)
 				forking(args);
 			}
 			free(path);
-		} else
+		}
+		else
 			perror(argv[0]);
-		return (1);
 	}
 	return (0);
 }

@@ -12,16 +12,14 @@ char **fill_arr_by_tokens(char *buf_copy, char **args)
 	char *piece = NULL;
 	int i = 0;
 
-	piece = strtok(buf_copy, " \t\n");
+	piece = strtok(buf_copy, " \'\"\n");
 	while (piece != NULL)
 	{
-		if (piece[0] == '#')
-			break;
 		args[i] = malloc(sizeof(char) * (_strlen(piece) + 1));
 		if (args[i] == NULL)
 			return (NULL);
 		_strcpy(args[i], piece);
-		piece = strtok(NULL, " \t\n");
+		piece = strtok(NULL, " \'\"\n");
 		i++;
 	}
 	args[i] = NULL;
