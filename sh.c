@@ -1,7 +1,7 @@
 #include "sh.h"
 
 
-int main(void)
+int main(int argc, char **argv)
 {
 	char *buffer = NULL, **args;
 	size_t len = 0;
@@ -10,6 +10,7 @@ int main(void)
 	int status;
 	int is_atty = 0;
 
+	(void) argc;
 	while(1 && is_atty == 0)
 	{
 		if (isatty(STDIN_FILENO) == 0)
@@ -26,7 +27,8 @@ int main(void)
 		}
 		if (c_reads > 0 && buffer[c_reads - 1] == '\n')
 			buffer[c_reads - 1] = '\0';
-
+		if (*buffer == '\0')
+			continue;
 		args = malloc(sizeof(char *) * 2);
 		args[0] = buffer;
 		args[1] = NULL;
@@ -40,7 +42,7 @@ int main(void)
 		if (pid == 0)
 			if (execve(args[0], args, NULL) == -1)
 			{
-				perror("Error execve");
+				perror(argv[0]);
 				exit(EXIT_FAILURE);
 			}
 	
