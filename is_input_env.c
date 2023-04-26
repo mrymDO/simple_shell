@@ -8,7 +8,7 @@
  * Return: void.
  */
 
-void is_input_env(char **args, char **env)
+void is_input_env(char **args)
 {
 	int i = 0, len = 0;
 
@@ -20,9 +20,10 @@ void is_input_env(char **args, char **env)
 	i = 0;
 	if (len == 1)
 	{
-		while (env[i])
+		while (environ[i])
 		{
-			write(1, env[i], _strlen(env[i]));
+			write(1, environ[i], _strlen(environ[i]));
+			write(1, "\n", 1);
 			i++;
 		}
 	}

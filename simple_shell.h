@@ -37,7 +37,7 @@ void forking(char *args[], char **env);
 void free_arr_of_strs(char **arr);
 unsigned int get_num_tokens(char *buf);
 char *get_path(char *cmd);
-void is_input_env(char **args, char **env);
+void is_input_env(char **args);
 void is_input_exit(char **args);
 int is_path(char *cmd);
 char *read_line();

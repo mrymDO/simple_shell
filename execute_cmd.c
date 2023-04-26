@@ -20,7 +20,7 @@ void check_built_n(char **args, char **env)
 		change_dir(args);
 
 	if (_strcmp(args[0], "env") == 0)
-		is_input_env(args, env);
+		is_input_env(args);
 }
 /**
  * execute_cmd - execute a command with its arguments
@@ -37,10 +37,12 @@ void execute_cmd(char **args, char **argv, char **env, int atty, char *buf)
 	char *path;
 
 	check_built_n(args, env);
+		return;
 
 	if (is_path(args[0]))
 	{
 		forking(args, env);
+		return;
 	}
 	else
 	{
