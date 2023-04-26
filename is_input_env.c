@@ -5,7 +5,7 @@
  * @args: user's input.
  * @env: command entred.
  *
- * Return: 1 on success. 0 otherwise.
+ * Return: void.
  */
 
 void is_input_env(char **args, char **env)
@@ -18,11 +18,11 @@ void is_input_env(char **args, char **env)
 		i++;
 	}
 	i = 0;
-	if (_strcmp(args[0], "env") == 0 && len == 1)
+	if (len == 1)
 	{
 		while (env[i])
 		{
-			printf("%s\n", env[i]);
+			write(1, env[i], _strlen(env[i]));
 			i++;
 		}
 	}

@@ -5,13 +5,11 @@
  * @args: arr of strings.
  * env: environment variables.
  *
- * Return: 1 on success. 0 otherwise.
+ * Return: void.
  */
 
 void check_built_n(char **args, char **env)
 {
-	is_input_exit(args);
-
 	if (_strcmp(args[0], "setenv") == 0)
 		set_env(args, env);
 
@@ -21,7 +19,8 @@ void check_built_n(char **args, char **env)
 	if (_strcmp(args[0], "cd") == 0)
 		change_dir(args);
 
-	is_input_env(args, env);
+	if (_strcmp(args[0], "env") == 0)
+		is_input_env(args, env);
 }
 /**
  * execute_cmd - execute a command with its arguments
@@ -30,7 +29,7 @@ void check_built_n(char **args, char **env)
  * @env: represents the environ,ent variable of current process
  * @atty: check if intractive or not
  * @buf: input line
- * Return: 0 if command is executed and 1 if there is an error
+ * Return: void. 
  */
 
 void execute_cmd(char **args, char **argv, char **env, int atty, char *buf)

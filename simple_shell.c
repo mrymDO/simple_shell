@@ -61,6 +61,11 @@ int main(int argc, char **argv, char **env)
 			return (-1);
 		}
 		args = fill_arr_by_tokens(buf_copy, args);
+		if (_strcmp(args[0], "exit") == 0)
+		{
+			free_all(args, buf, buf_copy, buf_copy_copy);
+			is_input_exit(args);
+		}
 		execute_cmd(args, argv, env, atty, buf_copy_copy);
 
 		free_all(args, buf, buf_copy, buf_copy_copy);
