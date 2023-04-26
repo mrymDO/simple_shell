@@ -30,7 +30,15 @@ int main(int argc, char **argv)
 		if (*buffer == '\0')
 			continue;
 		args = malloc(sizeof(char *) * 2);
-		args[0] = buffer;
+		if (args == NULL)
+			return (-1);
+		args[0] = malloc(sizeof(char) * (_strlen(buffer) + 1));
+		if (args[0] == NULL)
+		{
+			free(args);
+			return(-1);
+		}
+		_strcpy(args[0], buffer);
 		args[1] = NULL;
 	
 		pid = fork();
@@ -40,7 +48,7 @@ int main(int argc, char **argv)
 			exit(EXIT_FAILURE);
 		}
 		if (pid == 0)
-			if (execve(args[0], args, NULL) == -1)
+			if (execve(args[0], args, environ) == -1)
 			{
 				perror(argv[0]);
 				exit(EXIT_FAILURE);
@@ -51,7 +59,8 @@ int main(int argc, char **argv)
 			perror("Error wait");
 			exit(EXIT_FAILURE);
 		}
-                free(args);
+                free(args[0]);
+		free(args);
 	}
 	free(buffer);
 	return (0);
