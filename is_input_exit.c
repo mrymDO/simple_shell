@@ -13,10 +13,10 @@ void is_input_exit(char **args)
 		len++;
 
 	if (len == 1)
-		exit(status);
-	if (args[1] != NULL && len == 2)
+		_exit(status);
+	if (len == 2)
 	{
 		status = _atoi(args[1]);
-		exit(status);
+		_exit(status);
 	}
 }

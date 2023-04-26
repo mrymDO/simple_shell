@@ -1,5 +1,14 @@
 #include "simple_shell.h"
 
+/**
+ * free_all - free memory.
+ * @args: array of strings.
+ * @buf1: free buffer1.
+ * @buf2: free buffer2.
+ * @buf3: free buffer3.
+ *
+ * Return: void.
+ */
 
 void free_all(char **args, char *buf1, char *buf2, char *buf3)
 {
@@ -12,6 +21,13 @@ void free_all(char **args, char *buf1, char *buf2, char *buf3)
 	if (buf3)
 		free(buf3);
 }
+/**
+ * handle_sig - handle signal
+ * @sig: signal.
+ *
+ * Return: void.
+ */
+
 void handle_sig(int sig)
 {
 	(void)sig;
@@ -23,7 +39,7 @@ void handle_sig(int sig)
  * @argv: array of strings.
  * @env: environment variables.
  *
- * Return: 0 always success.
+ * Return: 0 always success. -1 otherwise.
  */
 
 int main(int argc, char **argv, char **env)
@@ -64,7 +80,7 @@ int main(int argc, char **argv, char **env)
 		if (_strcmp(args[0], "exit") == 0)
 		{
 			free_all(args, buf, buf_copy, buf_copy_copy);
-			exit(EXIT_FAILURE);
+			is_input_exit(args);
 		}
 		execute_cmd(args, argv, env, atty, buf_copy_copy);
 
