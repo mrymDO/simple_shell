@@ -15,9 +15,9 @@ char *read_line()
 	chars_read = getline(&buf, &len, stdin);
 	if (chars_read == -1)
 	{
+		write(1, "exit", 4);
 		free(buf);
-		perror("getline error");
-		exit(1);
+		exit(EXIT_FAILURE);
 	}
 	return (buf);
 }
