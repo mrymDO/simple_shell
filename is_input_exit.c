@@ -5,7 +5,7 @@
  * @args: arguments
  * Return: 0 if it is not 'exit'. Else 1
  */
-int is_input_exit(char **args)
+void is_input_exit(char **args)
 {
 	int i = 0, len = 0, status = 0;
 
@@ -21,7 +21,5 @@ int is_input_exit(char **args)
 			status = _atoi(args[1]);
 			exit(status);
 		}
-		return (1);
 	}
-	return (0);
 }
