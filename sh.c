@@ -17,10 +17,10 @@ int main(int argc, char **argv, char **env)
 	int status;
 	int is_atty = 0;
 
-	(void) argc;
-	signal(SIGINT, ignore_signal);
 	if (argc > 2)
 		return (-1);
+
+	signal(SIGINT, ignore_signal);
 	while(1 && is_atty == 0)
 	{
 		if (isatty(STDIN_FILENO) == 0)
@@ -29,7 +29,7 @@ int main(int argc, char **argv, char **env)
 			*/is_atty = 1;
 		}
 		else
-			write(1, "$ ", 2);
+			write(STDOUT_FILENO, "$ ", 2);
 		fflush(stdout);
 		c_reads = getline(&buffer, &len, stdin);
 		if (c_reads == -1)
@@ -52,7 +52,7 @@ int main(int argc, char **argv, char **env)
 
 		args[0] = buffer;
 		args[1] = NULL;
-		
+
 		pid = fork();
 		if (pid == -1)
 		{
