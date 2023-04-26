@@ -1,5 +1,26 @@
 #include "simple_shell.h"
 
+int check_built_n(char **args, char **env)
+{
+        if (_strcmp(args[0], "setenv") == 0)
+        {
+                set_env(args, env);
+                return (1);
+        }
+        if (_strcmp(args[0], "unsetenv") == 0)
+        {
+                unset_env(args, env);
+                return (1);
+        }
+        if (_strcmp(args[0], "cd") == 0)
+        {
+                change_dir(args);
+                return (1);
+        }
+        if (is_input_env(args, env))
+                return (1);
+        return (0);
+}
 /**
  * execute_cmd - execute a command with its arguments
  * @args: represents the command and its arguments
@@ -8,14 +29,13 @@
  * Return: 0 if command is executed and 1 if there is an error
  */
 
-int execute_cmd(char **args, char **argv, char **env)
+int execute_cmd(char **args, char **argv, char **env, int atty, char *buf_copy_copy)
 {
 	char *path;
 
-	is_input_exit(args);
-	
-	if (is_input_env(args, env))
+	if (check_built_n(args, env))
 		return (1);
+
 	if (is_path(args[0]))
 		forking(args);
 	else
@@ -32,7 +52,12 @@ int execute_cmd(char **args, char **argv, char **env)
 			free(path);
 		}
 		else
-			perror(argv[0]);
+		{
+			if (atty)
+                                fprintf(stderr, "%s : %d: %s: not found\n", argv[0], 1, buf_copy_copy);
+                        else
+                                perror(argv[0]);
+		}
 	}
 	return (0);
 }

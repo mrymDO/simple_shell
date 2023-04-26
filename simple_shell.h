@@ -29,7 +29,7 @@ char *_memcpy(char *dest, char *src, unsigned int n);
 
 
 
-int execute_cmd(char **args, char **argv, char **env);
+int execute_cmd(char **args, char **argv, char **env, int atty, char *buf_copy_copy);
 char **fill_arr_by_tokens(char *buf_copy, char **args);
 void forking(char *args[]);
 void free_arr_of_strs(char **arr);
@@ -40,5 +40,9 @@ void is_input_exit(char **args);
 int is_path(char *cmd);
 char *read_line();
 char **split_dirs(char *env_dirs);
+int change_dir(char **args);
+int check_built_n(char **args, char **env);
+void set_env(char **args, char **env);
+void unset_env(char **args, char **env);
 
 #endif

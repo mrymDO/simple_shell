@@ -20,18 +20,13 @@ void forking(char *args[])
 	}
 	if (pid == 0)
 	{
-		if (execve(args[0], args, NULL) == -1)
-		{
-			perror("execve error");
-			return;
-		}
+		execve(args[0], args, NULL);
 	}
 	else
 	{
 		if (wait(&status) == -1)
 		{
 			perror("wait error");
-			return;
 		}
 	}
 }
