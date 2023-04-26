@@ -3,20 +3,30 @@
 /**
  * is_input_exit - checks if the command is built-in command 'exit'
  * @args: arguments
- * Return: 0 if it is not 'exit'. Else 1
+ * @buf1: buffer1
+ * @buf2: buffer2
+ * @buf3: buffer3
+ * Return: void.
  */
-void is_input_exit(char **args)
+void is_input_exit(char **args, char buf1, char *buf2, char *buf3)
 {
 	int i = 0, len = 0, status = 0;
 
-	while (args[i++])
-		len++;
-
-	if (len == 1)
-		_exit(status);
-	if (len == 2)
+	if (_strcmp(args[0], "exit") == 0)
 	{
-		status = _atoi(args[1]);
-		_exit(status);
+		while (args[i++])
+			len++;
+
+		if (len == 1)
+		{
+			free_all(args, buf1, buf2, buf3);
+			exit(status);
+		}
+		if (len == 2)
+		{
+			status = _atoi(args[1]);
+			free_all(args, buf1, buf2, buf3);
+			exit(status);
+		}
 	}
 }

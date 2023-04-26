@@ -3,7 +3,6 @@
 /**
  * is_input_env - check if the input equal env command.
  * @args: user's input.
- * @env: command entred.
  *
  * Return: void.
  */

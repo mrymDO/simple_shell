@@ -3,7 +3,7 @@
 /**
  * check_built_n - check for built n.
  * @args: arr of strings.
- * env: environment variables.
+ * @env: environment variables.
  *
  * Return: void.
  */
@@ -29,7 +29,7 @@ void check_built_n(char **args, char **env)
  * @env: represents the environ,ent variable of current process
  * @atty: check if intractive or not
  * @buf: input line
- * Return: void. 
+ * Return: void.
  */
 
 void execute_cmd(char **args, char **argv, char **env, int atty, char *buf)

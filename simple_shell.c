@@ -44,10 +44,7 @@ void handle_sig(int sig)
 
 int main(int argc, char **argv, char **env)
 {
-	char **args;
-	char *buf;
-	char *buf_copy;
-	char *buf_copy_copy;
+	char *buf1, buf2, buf3, **args;
 	unsigned int len_args;
 	int atty = 0;
 
@@ -61,14 +58,14 @@ int main(int argc, char **argv, char **env)
 		else
 			write(1, "$ ", 2);
 		fflush(stdout);
-		buf = NULL;
+		buf1 = NULL;
 
-		buf = read_line();
-		if (*buf == '\n')
+		buf1 = read_line();
+		if (*buf1 == '\n')
 			continue;
-		buf_copy = _strdup(buf);
-		buf_copy_copy = _strdup(buf);
-		len_args = get_num_tokens(buf);
+		buf2 = _strdup(buf1);
+		buf3 = _strdup(buf2);
+		len_args = get_num_tokens(buf1);
 
 		args = malloc(sizeof(char *) * (len_args + 1));
 		if (args == NULL)
@@ -76,15 +73,11 @@ int main(int argc, char **argv, char **env)
 			perror("malloc fails ");
 			return (-1);
 		}
-		args = fill_arr_by_tokens(buf_copy, args);
-		if (_strcmp(args[0], "exit") == 0)
-		{
-			free_all(args, buf, buf_copy, buf_copy_copy);
-			is_input_exit(args);
-		}
-		execute_cmd(args, argv, env, atty, buf_copy_copy);
+		args = fill_arr_by_tokens(buf2, args);
 
-		free_all(args, buf, buf_copy, buf_copy_copy);
+		execute_cmd(args, argv, env, atty, buf1, buf2, buf3);
+
+		free_all(args, buf1, buf2, buf3);
 	}
 	return (0);
 }

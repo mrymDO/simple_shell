@@ -3,6 +3,8 @@
 /**
  * forking - create and execute command in child process.
  * @args: the command and its arguments to be executed int the chils process
+ * @env: environment variables.
+ *
  * Return : void
  */
 
