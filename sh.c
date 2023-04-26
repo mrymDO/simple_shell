@@ -3,30 +3,35 @@
 
 int main(void)
 {
-	char *buffer, **args;
+	char *buffer = NULL, **args;
 	size_t len = 0;
 	ssize_t c_reads;
 	pid_t pid;
 	int status;
+	int is_atty = 0;
 
-	while(1)
+	while(1 && is_atty == 0)
 	{
-		write(1, "$ ", 2);
+		if (isatty(STDIN_FILENO) == 0)
+			is_atty = 1;
+		else
+			write(1, "$ ", 2);
 		fflush(stdout);
 		c_reads = getline(&buffer, &len, stdin);
 		if (c_reads == -1)
 		{
+			write(1, "\n", 1);
 			free(buffer);
-			perror("Error getline");
+			exit(EXIT_FAILURE);
 		}
 		if (c_reads > 0 && buffer[c_reads - 1] == '\n')
+		{
 			buffer[c_reads - 1] = '\0';
-		args = malloc(sizeof(char *) * 2);
-		args[0] = malloc(sizeof(char) * (strlen(buffer) + 1));
+			args = malloc(sizeof(char *) * 2);
+			args[0] = buffer;
 		args[1] = NULL;
-		strcpy(args[0], buffer);
 		pid = fork();
-		if (pid == -1)
+		if (pid < 0)
 		{
 			perror("Error fork");
 		}
@@ -43,10 +48,10 @@ int main(void)
 			{
 				perror("Error wait");
 			}
-			free(buffer);
-			free(args[0]);
-            		free(args);
+		}
+                free(args);
 		}
 	}
+	free(buffer);
 	return (0);
 }
