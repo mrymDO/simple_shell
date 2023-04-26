@@ -38,10 +38,14 @@ int main(int argc, char **argv, char **env)
 			continue;
 		args = malloc(sizeof(char *) * 2);
 		if (args == NULL)
+		{
+			free(buffer);
 			return (-1);
+		}
 		args[0] = malloc(sizeof(char) * (_strlen(buffer) + 1));
 		if (args[0] == NULL)
 		{
+			free(buffer);
 			free(args);
 			return(-1);
 		}
@@ -51,6 +55,9 @@ int main(int argc, char **argv, char **env)
 		pid = fork();
 		if (pid < 0)
 		{
+			free(args[0]);
+                        free(args);
+                        free(buffer);
 			perror("Error fork");
 			exit(EXIT_FAILURE);
 		}
@@ -58,12 +65,18 @@ int main(int argc, char **argv, char **env)
 			if (execve(args[0], args, env) == -1)
 			{
 				perror(argv[0]);
+				free(args[0]);
+				free(args);
+				free(buffer);
 				exit(EXIT_FAILURE);
 			}
 	
 		if (waitpid(pid, &status, 0) == -1)
 		{
 			perror("Error wait");
+			free(args[0]);
+                        free(args);
+                        free(buffer);
 			exit(EXIT_FAILURE);
 		}
                 free(args[0]);
