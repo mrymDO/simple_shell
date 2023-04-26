@@ -7,6 +7,7 @@ void ignore_signal(int signal)
     fflush(stdout);
 }
 
+
 int main(int argc, char **argv, char **env)
 {
 	char *buffer = NULL, **args;
@@ -18,10 +19,15 @@ int main(int argc, char **argv, char **env)
 
 	(void) argc;
 	signal(SIGINT, ignore_signal);
+	if (argc > 2)
+		return (-1);
 	while(1 && is_atty == 0)
 	{
 		if (isatty(STDIN_FILENO) == 0)
-			is_atty = 1;
+		{
+			/*fprintf(stderr, "%s : %d : %s: not found\n", argv[0], 1, args[0]);
+			*/is_atty = 1;
+		}
 		else
 			write(1, "$ ", 2);
 		fflush(stdout);
@@ -36,52 +42,38 @@ int main(int argc, char **argv, char **env)
 			buffer[c_reads - 1] = '\0';
 		if (*buffer == '\0')
 			continue;
+
 		args = malloc(sizeof(char *) * 2);
 		if (args == NULL)
 		{
 			free(buffer);
 			return (-1);
 		}
-		args[0] = malloc(sizeof(char) * (_strlen(buffer) + 1));
-		if (args[0] == NULL)
-		{
-			free(buffer);
-			free(args);
-			return(-1);
-		}
-		_strcpy(args[0], buffer);
+
+		args[0] = buffer;
 		args[1] = NULL;
-	
+		
 		pid = fork();
-		if (pid < 0)
+		if (pid == -1)
 		{
-			free(args[0]);
-                        free(args);
-                        free(buffer);
 			perror("Error fork");
-			exit(EXIT_FAILURE);
 		}
-		if (pid == 0)
+		else if (pid == 0)
+		{
 			if (execve(args[0], args, env) == -1)
 			{
 				perror(argv[0]);
-				free(args[0]);
-				free(args);
-				free(buffer);
-				exit(EXIT_FAILURE);
 			}
-	
-		if (waitpid(pid, &status, 0) == -1)
-		{
-			perror("Error wait");
-			free(args[0]);
-                        free(args);
+			free(args);
                         free(buffer);
-			exit(EXIT_FAILURE);
 		}
-                free(args[0]);
-		free(args);
+		else
+		{
+			if (wait(&status) == -1)
+			{
+				perror("Error wait");
+			}
+		}
 	}
-	free(buffer);
 	return (0);
 }
