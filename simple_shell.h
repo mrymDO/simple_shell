@@ -10,6 +10,7 @@
 #include <string.h>
 #include <errno.h>  
 #include <stddef.h> 
+#include <fcntl.h>
 
 
 extern char **environ;
@@ -25,8 +26,9 @@ char *_strdup(const char *s);
 int _strncmp(const char *s1, const char *s2, size_t n);
 void *_realloc(void *ptr, unsigned int size);
 char *_memcpy(char *dest, char *src, unsigned int n);
-
-
+int _atoi(char *s);
+ssize_t _getline(char **lineptr, size_t *n, char *stream);
+char *my_strtok(char *str, char *delim);
 
 
 void execute_cmd(char **args, char **argv, char **env, int atty, char *buf_copy_copy);
