@@ -64,7 +64,7 @@ int main(int argc, char **argv, char **env)
 		if (_strcmp(args[0], "exit") == 0)
 		{
 			free_all(args, buf, buf_copy, buf_copy_copy);
-			is_input_exit(args);
+			exit(EXIT_FAILURE);
 		}
 		execute_cmd(args, argv, env, atty, buf_copy_copy);
 
