@@ -12,12 +12,13 @@ int execute_cmd(char **args, char **argv, char **env)
 {
 	char *path;
 
-	is_input_exit(args);
-	
 	if (is_input_env(args, env))
 		return (1);
 	if (is_path(args[0]))
+	{
 		forking(args);
+		return (1);
+	}
 	else
 	{
 		path = get_path(args[0]);
@@ -33,6 +34,7 @@ int execute_cmd(char **args, char **argv, char **env)
 		}
 		else
 			perror(argv[0]);
+		return (1);
 	}
 	return (0);
 }

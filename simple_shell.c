@@ -36,11 +36,19 @@ int main(int argc, char **argv, char **env)
 			return (-1);
 		}
 		args = fill_arr_by_tokens(buf_copy, args);
+		if (_strcmp(args[0], "exit") == 0)
+		{
+			free(buf);
+                        free(buf_copy);
+			is_input_exit(args);
+		}	
 		if (execute_cmd(args, argv, env))
+		{
+			free_arr_of_strs(args);
+			free(buf);
+			free(buf_copy);
 			continue;
-		free_arr_of_strs(args);
-		free(buf);
-		free(buf_copy);
+		}
 	}
 	return (0);
 }
