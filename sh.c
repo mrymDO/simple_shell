@@ -1,7 +1,7 @@
 #include "sh.h"
 
 
-int main(int argc, char **argv)
+int main(int argc, char **argv, char **env)
 {
 	char *buffer = NULL, **args;
 	size_t len = 0;
@@ -48,7 +48,7 @@ int main(int argc, char **argv)
 			exit(EXIT_FAILURE);
 		}
 		if (pid == 0)
-			if (execve(args[0], args, environ) == -1)
+			if (execve(args[0], args, env) == -1)
 			{
 				perror(argv[0]);
 				exit(EXIT_FAILURE);

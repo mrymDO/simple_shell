@@ -11,7 +11,6 @@
 #include <errno.h>
 #include <stddef.h>
 
-extern char **environ;
 
 int _strlen(const char *s);
 char *_strcpy(char *dest, const char *src);
