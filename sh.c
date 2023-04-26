@@ -1,62 +1,67 @@
 #include "sh.h"
 
 
-int main(void)
+int main(int argc, char **argv, char **env)
 {
-	char *buffer = 0;
-        char **args;
+	char *buffer = NULL, **args;
 	size_t len = 0;
 	ssize_t c_reads;
 	pid_t pid;
 	int status;
+	int is_atty = 0;
 
-	while(1)
+	if (argc > 2)
+		return (-1);
+	while(1 && is_atty == 0)
 	{
-		write(1, "$ ", 2);
+		if (isatty(STDIN_FILENO) == 0)
+			is_atty = 1;
+		else
+			write(1, "$ ", 2);
 		fflush(stdout);
 		c_reads = getline(&buffer, &len, stdin);
 		if (c_reads == -1)
 		{
+			write(1, "\n", 1);
 			free(buffer);
-			perror("Error getline");
-			 exit(EXIT_FAILURE);
+			exit(EXIT_FAILURE);
 		}
-		else if (c_reads > 0 && buffer[c_reads - 1] == '\n')
-		{
+		if (c_reads > 0 && buffer[c_reads - 1] == '\n')
 			buffer[c_reads - 1] = '\0';
-		}
+		if (*buffer == '\0')
+			continue;
 		args = malloc(sizeof(char *) * 2);
 		if (args == NULL)
+			return (-1);
+		args[0] = malloc(sizeof(char) * (_strlen(buffer) + 1));
+		if (args[0] == NULL)
 		{
-			perror("Errror malloc");
-			 exit(EXIT_FAILURE);
+			free(args);
+			return(-1);
 		}
-		args[0] = buffer;
+		_strcpy(args[0], buffer);
 		args[1] = NULL;
+	
 		pid = fork();
-		if (pid == -1)
+		if (pid < 0)
 		{
 			perror("Error fork");
-			 exit(EXIT_FAILURE);
+			exit(EXIT_FAILURE);
 		}
-		else if (pid == 0)
-		{
-			if (execve(args[0], args, NULL) == -1)
+		if (pid == 0)
+			if (execve(args[0], args, env) == -1)
 			{
-				perror("Error execve");
-				 exit(EXIT_FAILURE);
+				perror(argv[0]);
+				exit(EXIT_FAILURE);
 			}
-		}
-		else
+	
+		if (waitpid(pid, &status, 0) == -1)
 		{
-			if (wait(&status) == -1)
-			{
-				perror("Error wait");
-				 exit(EXIT_FAILURE);
-			}	
+			perror("Error wait");
+			exit(EXIT_FAILURE);
 		}
+                free(args[0]);
 		free(args);
-		
 	}
 	free(buffer);
 	return (0);
