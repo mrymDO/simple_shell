@@ -1,5 +1,11 @@
 #include "sh.h"
 
+void ignore_signal(int signal)
+{
+    (void) signal;
+    write(STDOUT_FILENO, "\n$ ", 3);
+    fflush(stdout);
+}
 
 int main(int argc, char **argv, char **env)
 {
@@ -11,6 +17,7 @@ int main(int argc, char **argv, char **env)
 	int is_atty = 0;
 
 	(void) argc;
+	signal(SIGINT, ignore_signal);
 	while(1 && is_atty == 0)
 	{
 		if (isatty(STDIN_FILENO) == 0)
