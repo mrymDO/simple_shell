@@ -10,7 +10,7 @@
  */
 void is_input_exit(char **args, char *buf1, char *buf2, char *buf3)
 {
-	int i = 0, len = 0, status = 0;
+	int i = 0, len = 0, status = -1;
 
 	while (args[i++])
 		len++;

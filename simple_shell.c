@@ -61,7 +61,7 @@ int main(int argc, char **argv, char **env)
 		buf1 = NULL;
 
 		buf1 = read_line();
-		if (*buf1 == '\n')
+		if (*buf1 == '\0')
 			continue;
 		buf2 = _strdup(buf1);
 		buf3 = _strdup(buf2);
@@ -74,7 +74,8 @@ int main(int argc, char **argv, char **env)
 			return (-1);
 		}
 		args = fill_arr_by_tokens(buf2, args);
-
+		if (args[0] == NULL)
+			continue;
 		execute_cmd(args, argv, env, atty, buf1, buf2, buf3);
 
 		free_all(args, buf1, buf2, buf3);
