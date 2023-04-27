@@ -3,6 +3,7 @@
 /**
  * check_built_n - check for built n.
  * @args: arr of strings.
+ * @argv: command's arguments
  * @env: environment variables.
  * @buf1: buffer1
  * @buf2: buffer2
@@ -11,7 +12,7 @@
  * Return: 1 on success. 0 otherwise.
  */
 
-int check_built_n(char **args, char **env, char *buf1, char *buf2, char *buf3)
+int check_built_n(char **args, char **argv, char **env, char *buf1, char *buf2, char *buf3)
 {
 	if (_strcmp(args[0], "setenv") == 0)
 	{
@@ -38,7 +39,7 @@ int check_built_n(char **args, char **env, char *buf1, char *buf2, char *buf3)
 	}
 	if (_strcmp(args[0], "exit") == 0)
 	{
-		is_input_exit(args, buf1, buf2, buf3);
+		is_input_exit(args, argv, buf1, buf2, buf3);
 		return (1);
 	}
 	return (0);
@@ -61,7 +62,7 @@ void execute_cmd(char **args, char **argv, char **env,
 {
 	char *path;
 
-	if (check_built_n(args, env, buf1, buf2, buf3))
+	if (check_built_n(args, argv, env, buf1, buf2, buf3))
 		return;
 
 	if (is_path(args[0]))

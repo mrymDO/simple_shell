@@ -12,7 +12,7 @@ char **fill_arr_by_tokens(char *buf_copy, char **args)
 	char *piece = NULL;
 	int i = 0;
 
-	piece = strtok(buf_copy, " \t\n");
+	piece = strtok(buf_copy, " \t");
 	while (piece != NULL)
 	{
 		if (piece[0] == '#')
@@ -21,7 +21,7 @@ char **fill_arr_by_tokens(char *buf_copy, char **args)
 		if (args[i] == NULL)
 			return (NULL);
 		_strcpy(args[i], piece);
-		piece = strtok(NULL, " \t\n");
+		piece = strtok(NULL, " \t");
 		i++;
 	}
 	args[i] = NULL;
