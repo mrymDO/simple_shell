@@ -2,7 +2,7 @@
 
 /**
  * check_built_n - check for built n.
- * @args: arr of strings.
+ * @args: array of strings.
  * @env: environment variables.
  * @buf1: buffer1
  * @buf2: buffer2
