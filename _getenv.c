@@ -3,7 +3,7 @@
 /**
  * _getenv - searches environment list to find the environement variable name
  * @varname: string containing the requested variable
- * Return: a pinter to the corresponding value of the requested env variable
+ * Return: a pointer to the corresponding value of the requested env variable
  * NULL if there is no much
  */
 
