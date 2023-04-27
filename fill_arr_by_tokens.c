@@ -2,7 +2,7 @@
 
 /**
  * fill_arr_by_tokens - split string into tokens,store them in array of strings
- * @buf_copy: the input srtring to be tokenized
+ * @buf_copy: the input string to be tokenized
  * @args: pointer to array of strings which will hold the resulting tokens
  * Return: array of strings which contains all tokens from input string
  */
