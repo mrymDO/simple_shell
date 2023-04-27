@@ -3,7 +3,7 @@
 #define SIZE 1024
 /**
  * change - execute chdir function.
- * @path: path to be executed.
+ * @path: the path to be executed.
  *
  * Return: 1 on success. -1 on failure.
  */
