@@ -39,14 +39,12 @@ void free_arr_of_strs(char **arr);
 unsigned int get_num_tokens(char *buf);
 char *get_path(char *cmd);
 void is_input_env(char **args);
-void is_input_exit(char **args, char **argv,
-		char *buf1, char *buf2, char *buf3);
+void is_input_exit(char **args, char *buf1, char *buf2, char *buf3);
 int is_path(char *cmd);
 char *read_line();
 char **split_dirs(char *env_dirs);
 int change_dir(char **args);
-int check_built_n(char **args, char **argv,
-		char **env, char *buf1, char *buf2, char *buf3);
+int check_built_n(char **args, char **env, char *buf1, char *buf2, char *buf3);
 void set_env(char **args, char **env);
 void unset_env(char **args, char **env);
 void free_all(char **args, char *buf1, char *buf2, char *buf3);

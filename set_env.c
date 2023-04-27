@@ -33,5 +33,7 @@ void set_env(char **args, char **env)
 		_strcat(en[i], args[2]);
 		en[i + 1] = NULL;
 		env = en;
+		free(en[i]);
+		free(en);
 	}
 }
