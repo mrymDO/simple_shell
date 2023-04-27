@@ -6,7 +6,7 @@
  * @lineptr: ptr to ptr to
  * @n: the size of the buffer pointed to by *lineptr
  * @stream: pointer to filee stream from which to read the input line
- * Return: number of char read including '\n' excluding '\0'
+ * Return: number of chars read including '\n' excluding '\0'
  * if error occurs or EOF, else return -1
  */
 
