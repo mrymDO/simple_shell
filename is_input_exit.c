@@ -10,12 +10,15 @@
  */
 void is_input_exit(char **args, char *buf1, char *buf2, char *buf3)
 {
-	int i = 0, len = 0, status = -1;
+	int i = 0, len = 0, status = 0;
 
-	while (args[i++])
+	while (args[i])
+	{
 		len++;
+		i++;
+	}
 
-	if (len == 1)
+	if (len == 1 || (len == 2 && _strcmp(args[1], "0") == 0))
 	{
 		free_all(args, buf1, buf2, buf3);
 		exit(status);
