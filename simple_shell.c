@@ -44,7 +44,7 @@ void handle_sig(int sig)
 
 int main(int argc, char **argv, char **env)
 {
-	char *buf1, buf2, buf3, **args;
+	char *buf1, *buf2, *buf3, **args;
 	unsigned int len_args;
 	int atty = 0;
 

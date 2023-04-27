@@ -4,23 +4,45 @@
  * check_built_n - check for built n.
  * @args: arr of strings.
  * @env: environment variables.
+ * @buf1: buffer1
+ * @buf2: buffer2
+ * @buf3: buffer3
  *
- * Return: void.
+ * Return: 1 on success. 0 otherwise.
  */
 
-void check_built_n(char **args, char **env)
+int check_built_n(char **args, char **env, char *buf1, char *buf2, char *buf3)
 {
 	if (_strcmp(args[0], "setenv") == 0)
+	{
 		set_env(args, env);
+		return (1);
+	}
 
 	if (_strcmp(args[0], "unsetenv") == 0)
+	{
 		unset_env(args, env);
+		return (1);
+	}
 
 	if (_strcmp(args[0], "cd") == 0)
+	{
 		change_dir(args);
+		return (1);
+	}
 
 	if (_strcmp(args[0], "env") == 0)
+	{
 		is_input_env(args);
+		return (1);
+	}
+	if (_strcmp(args[0], "exit") == 0)
+	{
+		is_input_exit(args, buf1, buf2, buf3);
+		return (1);
+	}
+	return (0);
+
 }
 /**
  * execute_cmd - execute a command with its arguments
@@ -28,15 +50,18 @@ void check_built_n(char **args, char **env)
  * @argv: represents the arguments passed to the main function
  * @env: represents the environ,ent variable of current process
  * @atty: check if intractive or not
- * @buf: input line
+ * @buf1: buffer1
+ * @buf2: buffer2
+ * @buf3: buffer3
  * Return: void.
  */
 
-void execute_cmd(char **args, char **argv, char **env, int atty, char *buf)
+void execute_cmd(char **args, char **argv, char **env,
+		int atty, char *buf1, char *buf2, char *buf3)
 {
 	char *path;
 
-	check_built_n(args, env);
+	if (check_built_n(args, env, buf1, buf2, buf3))
 		return;
 
 	if (is_path(args[0]))
@@ -64,7 +89,7 @@ void execute_cmd(char **args, char **argv, char **env, int atty, char *buf)
 		else
 		{
 			if (atty)
-				fprintf(stderr, "%s : %d: %s: not found\n", argv[0], 1, buf);
+				fprintf(stderr, "%s : %d: %s: not found\n", argv[0], 1, buf1);
 			else
 				perror(argv[0]);
 		}

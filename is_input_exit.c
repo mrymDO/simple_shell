@@ -8,25 +8,22 @@
  * @buf3: buffer3
  * Return: void.
  */
-void is_input_exit(char **args, char buf1, char *buf2, char *buf3)
+void is_input_exit(char **args, char *buf1, char *buf2, char *buf3)
 {
 	int i = 0, len = 0, status = 0;
 
-	if (_strcmp(args[0], "exit") == 0)
-	{
-		while (args[i++])
-			len++;
+	while (args[i++])
+		len++;
 
-		if (len == 1)
-		{
-			free_all(args, buf1, buf2, buf3);
-			exit(status);
-		}
-		if (len == 2)
-		{
-			status = _atoi(args[1]);
-			free_all(args, buf1, buf2, buf3);
-			exit(status);
-		}
+	if (len == 1)
+	{
+		free_all(args, buf1, buf2, buf3);
+		exit(status);
+	}
+	if (len == 2)
+	{
+		status = _atoi(args[1]);
+		free_all(args, buf1, buf2, buf3);
+		exit(status);
 	}
 }
