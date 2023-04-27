@@ -1,7 +1,7 @@
 #include "simple_shell.h"
 
 /**
- * free_arr_of_strs - free the memory allocated foor the array of strings
+ * free_arr_of_strs - free the memory allocated for the array of strings
  * @arr: a pointer to an array of strings
  * Return: void
  */
